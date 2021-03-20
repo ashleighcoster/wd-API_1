@@ -4,24 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./stylesheet.css">
-    <title>Document</title>
+    <title>API_1 Project</title>
 </head>
 <body>
 
-    <header>
-        <h1>Find Your Inspiration</h1>
-        <div class="picture" id="picture-container">
-    
-        <img src="./assets/cameraLens.jfif" alt="camera" id="camera">
+    <div class="container">
+        <h1>Picture A Day</h1>
+        <div class="flex">
+            <form class="flex" id="submit">
+                <input type="text" id="search" placeholder="Enter a number to get a random picture">
+                <button class="search-btn" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
         </div>
 
-        <form id="form">
-            <input type="text" id="search">
-        </form>
-        </header>
+        <div id="result-heading"></div>
+        <div id="pictures" class="pictures">
+            <div class="img"></div>
+        </div>
+    </div>
 
-
+ 
     <script src="./API_1.js"></script>
     
 </body>

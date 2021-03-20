@@ -1,24 +1,60 @@
-const baseURL = "https://picsum.photos/v2/list?page=2&limit=100"
-let camera = document.getElementById('camera')
+//SET GLOBAL VARIABLES 
+// const baseURL = "https://picsum.photos/v2/list?page=3&limit=300"
+const search = document.getElementById('search');
+const submit = document.getElementById('submit'); 
+const resultHeading = document.getElementById('result-heading'); 
+const pictures = document.getElementById('pictures'); 
+const img = document.getElementById('img');
 
-async function getPictures() {
-    let res = await fetch(baseURL)
-    let data = await res.json()
-    console.log(data);
-     // showPicture(data);
+
+//SET EVENT LISTENER 
+submit.addEventListener('submit', searchPictures);
+
+
+function searchPictures(e) {
+    e.preventDefault();
+
+     const term = search.value; 
+    // console.log(term);
+    if (term.trim()) {
+        fetch(`https://picsum.photos/id/${term}/info`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.url);
+            resultHeading.innerHTML = `<h2>Search results for number "${term}":</h2>`;
+        
+         
+            if(data.id === null) {
+            resultHeading.innerHTML = `<p>There are no pictures available. Please try another number.</p>`;
+            } else {
+                pictures.innerHTML = data.map(picture => 
+                `
+                <div class="pictures">
+                    <img src = "${data.url}" alt="${data.id}"/>
+                    <div class="author-info" data-pictureID="${data.id}">
+                        <h3>${data.author}</h3>
+                    </div>
+                </div>
+                `
+                )
+                .join('');
+            }
+        });
+    } else {
+        alert('Please enter a search term');
+    }  
+    
+    // let author = document.createElement('p');
+    // author = data.author; 
+
+    // let img = document.createElement('img');
+    // img.src = data.url; 
+    // img.alt = data.id; 
+
+    // pictures.appendChild(img); 
+    // pictures.appendChild(author);
 }
-   
 
 
-getPictures();
 
-let showPicture = data => {
-    console.log(data);
-}
 
-const pictures = async () => {
-    for(let i = 0; i <=100; i++ ) {
-        // await getPictures(i)
-        console.log(data.url);
-    }
-}
